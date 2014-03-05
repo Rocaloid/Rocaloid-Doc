@@ -2,7 +2,7 @@
 
         Rocaloid is a free vocal synthesis \textbf{system}.
         
-        Please notice the bold text ``\textbf{system}", which differs it from a ``software" or ``application": in a broad sense, Rocaloid provides a series of tools and libraries from the very basic DSP libs to synthesis engine and musical score editor. In a narrow sense, what Rocaloid represents in this reference is the back-end of this system.
+        Please notice the bold word ``\textbf{system}", which differs it from a ``software" or ``application": in a broad sense, Rocaloid provides a series of tools and libraries from the very basic DSP libs to synthesis engine and musical score editor. In a narrow sense, what Rocaloid represents in this reference is the back-end of this system.
         
         \bigskip
         
@@ -24,9 +24,32 @@
         
         \begin{itemize}
                 \item Our wheels focus on audio signal processing. Surely they are more relevant to our topic.
-                \item Our wheels are interrelated with great consistency. e.g. variable namming convention.
+                \item Our wheels are interrelated with great consistency. e.g. variable naming convention.
                 \item Our wheels run faster than other wheels(on certain conditions and platforms which are commonly used by our users). e.g. CVEDSP performs 1024-point FFT 1.3 times faster than fftw3 on x86 with SSE.
-                \item We intend to minimize dependencies of Rocaloid.
+                \item We intend to minimize dependencies of Rocaloid(libc only).
                 \item The developers themselves learn from the project as they reinvent the wheels.
         \end{itemize}
+
+\section{Current Status}\indent
+
+        The development of Rocaloid3 started in September, 2013. The core synthesis engine, CVE3, was finished in December. However, a crucial defect was detected in the algorithm and we had to redesign the engine.
+        
+        Our decision was to abandon CVE3 and move on to CVE3.5, by the way restructuring the whole project.
+        
+        We have adopted SMS technique for the new synthesis engine. The detailed algorithm will be discussed in Chapter 2.
+        
+        Currently we are just about to start the restructuring.
+
+\section{About the System}
+
+\subsection{General Diagram}\indent
+
+        From the users' point of view, Rocaloid reads in a music score file with melody and lyrics, accesses to a soundfont database, and outputs a .wav sound file.
+
+        The soundfont is sampled from a real person(the sound provider). The raw samples undergo preprocesses(e.g. segmentation) and are then converted to sound font format.
+
+\subsection{Inside Rocaloid}\indent
+
+        After Rocaloid starts up, the music score file is first converted to a vocal description file. This file describes voice in a phonetic level(lower than muscial level). The second step is to convert the voice description file to a soundfont-specific engine script. Many details of voice are generated in this step, such as the exact duration for each phoneme.
+
 
