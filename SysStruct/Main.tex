@@ -49,7 +49,7 @@
 
         The soundfont is sampled from a real person(the sound provider). The raw samples undergo preprocesses(e.g. segmentation) and are then converted to sound font format.
         
-        \pic{12cm}{SysStruct/GeneralDiagram.png}{General Diagram of Rocaloid3}
+        \pic{12cm}{SysStruct/GeneralDiagram.png}{General Concept of Rocaloid3}
         \newpage
 
 \subsection{Inside Rocaloid}\indent
@@ -57,6 +57,8 @@
         After Rocaloid starts up, the musical score file is first converted to a vocal description file. This file describes voice in a phonetic level(lower than muscial level). The second step is to convert the voice description file to a soundfont-specific engine script. Many details of voice are generated in this step, such as the exact duration for each phoneme.
         
         Then the CVE synthesis engine is called. CVE directly reads the soundfont-specific script and the soundfont database. The synthesis process may take a while, and finally a .wav file is produced.
+        
+        \newpage
 
 \subsection{Modules}\indent
 
@@ -75,11 +77,43 @@
         \end{tabular}
         \bigskip
         
-        Beyond these modules, Wavetave is an audio processing sandbox written in octave language and C++. All algorithms used by Rocaloid are first tested in Wavetave.
+        Beyond these modules, Wavetave is an audio processing sandbox written in Octave Language and C++. All algorithms used by Rocaloid are first tested in Wavetave.
         
         One undocumented module is CVEANN, a small Artificial Neuron Network library initially designed for formant detection and voice parameter generation. However the performance of CVEANN was unsatisfactory and it has been obsoleted.
-
+        
+        \newpage
         
         \pic{12cm}{SysStruct/Dependency.png}{Dependency Chart of Rocaloid3}
+        
+        \newpage
 
+\subsection{File Types}
+
+        \begin{tabular}{lll}
+        	.rvs & \parbox{11cm}{\textbf{Rocaloid Vocal Script}: Phonetic description of voice.}\\
+        	.cvs & \parbox{11cm}{\textbf{CyberVoice Script}: Detailed soundfont-specific description of voice.}\\
+        	.cvdb & \parbox{11cm}{\textbf{CyberVoice DataBase}: A soundfont particle which contains a diphone or a single phoneme.}\\
+        \end{tabular}
+
+\section{About this Reference}\indent
+
+        The composition of this reference is parallel to the construction of Rocaloid3. Even if the project is unfinished and actually in the very beginning, we will make detailed record of usages and descriptions here.
+        
+        This reference is written in \LaTeX. Diagrams in this reference are created with Dia.
+        
+        Source code of this reference:
+        
+        https://github.com/Rocaloid/Rocaloid-Doc
+
+\subsection{For Developers}\indent
+
+        We are glad you are willing to contribute to Rocaloid.
+        
+        Please read through this reference first, then send an email to Sleepwalking and describe yourself to join the development team:
+        
+        \bigskip
+        
+        sleepwalking@rocaloid.org
+        
+        \bigskip
 
