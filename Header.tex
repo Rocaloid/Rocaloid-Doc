@@ -1,6 +1,7 @@
 \documentclass[a4paper,12pt]{report}
 
-\usepackage[english]{babel} %language selection
+\usepackage[english]{babel} %Language selection
+\usepackage{graphicx}
 \selectlanguage{english}
 
 \pagenumbering{arabic}
@@ -14,5 +15,17 @@
            bookmarksopen=true,
            pdftex}
 
-\hfuzz = .6pt % avoid black boxes
+\hfuzz = .6pt %Avoid black boxes
+
+\renewcommand{\arraystretch}{2} %Table row stretch
+
+%Append picture
+\newcommand{\pic}[3]
+{
+        \begin{figure}[h]
+                \centering
+                \includegraphics[width = #1]{#2}
+                \caption{#3}
+        \end{figure}
+}
 

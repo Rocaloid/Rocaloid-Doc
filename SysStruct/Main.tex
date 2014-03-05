@@ -18,16 +18,17 @@
         
         http://www.rocaloid.org
         
-\subsection{Values}\indent
+\subsection{Why Reinventing the Wheel?}\indent
 
         In the back-end of Rocaloid, we code everything from scratch. The author Sleepwalking himself is a pure enthusiast in voice signal processing and he does not really care about development cycle. If you are looking for a reason for reinventing the wheel, we would suggest:
         
         \begin{itemize}
-                \item Our wheels focus on audio signal processing. Surely they are more relevant to our topic.
+                \item Our wheels are smaller and faster than other wheels(on certain conditions and platforms which are commonly used by our users). e.g. CVEDSP performs 1024-point FFT 1.3 times faster than fftw3 on x86 with SSE.
                 \item Our wheels are interrelated with great consistency. e.g. variable naming convention.
-                \item Our wheels run faster than other wheels(on certain conditions and platforms which are commonly used by our users). e.g. CVEDSP performs 1024-point FFT 1.3 times faster than fftw3 on x86 with SSE.
+                \item Our wheels focus on audio signal processing. Surely they are more relevant to our topic.
                 \item We intend to minimize dependencies of Rocaloid(libc only).
-                \item The developers themselves learn from the project as they reinvent the wheels.
+                \item By reventing the wheels we are sure that Rocaloid will be forever free.
+                \item And finally, the developers themselves learn from the project as they reinvent the wheels.
         \end{itemize}
 
 \section{Current Status}\indent
@@ -38,18 +39,47 @@
         
         We have adopted SMS technique for the new synthesis engine. The detailed algorithm will be discussed in Chapter 2.
         
-        Currently we are just about to start the restructuring.
+        Currently we are \textbf{just about to start} the restructuring.
 
 \section{About the System}
 
 \subsection{General Diagram}\indent
 
-        From the users' point of view, Rocaloid reads in a music score file with melody and lyrics, accesses to a soundfont database, and outputs a .wav sound file.
+        From the users' point of view, Rocaloid reads in a musical score file with melody and lyrics, accesses to a soundfont database, and outputs a .wav sound file.
 
         The soundfont is sampled from a real person(the sound provider). The raw samples undergo preprocesses(e.g. segmentation) and are then converted to sound font format.
+        
+        \pic{12cm}{SysStruct/GeneralDiagram.png}{General Diagram of Rocaloid3}
+        \newpage
 
 \subsection{Inside Rocaloid}\indent
 
-        After Rocaloid starts up, the music score file is first converted to a vocal description file. This file describes voice in a phonetic level(lower than muscial level). The second step is to convert the voice description file to a soundfont-specific engine script. Many details of voice are generated in this step, such as the exact duration for each phoneme.
+        After Rocaloid starts up, the musical score file is first converted to a vocal description file. This file describes voice in a phonetic level(lower than muscial level). The second step is to convert the voice description file to a soundfont-specific engine script. Many details of voice are generated in this step, such as the exact duration for each phoneme.
+        
+        Then the CVE synthesis engine is called. CVE directly reads the soundfont-specific script and the soundfont database. The synthesis process may take a while, and finally a .wav file is produced.
+
+\subsection{Modules}\indent
+
+        Rocaloid3 is composed of the following modules:
+        
+        \bigskip
+        \begin{tabular}{lll}
+        	RUtil2 & \parbox{9.5cm}{A tiny library for Objected Oriented Programming and dynamic data structure in C.}\\
+        	RFNL & \parbox{9.5cm}{A fast float-point numeric library. Contains basic techniques such as FFT and interpolation methods.}\\
+        	CVEDSP2 & \parbox{9.5cm}{A digital signal processing framework that wraps some DSP techniques in interconnectable modules.}\\
+        	CVESMS & \parbox{9.5cm}{A voice signal processing toolbox based on CVEDSP2.}\\
+        	RFILE3 & \parbox{9.5cm}{A library for file support and input/output.}\\
+        	CVE3.5 & \parbox{9.5cm}{The core synthesis engine.}\\
+        	RParagen & \parbox{9.5cm}{The soundfont-specific script generator.}\\
+        	CVDBToolChain & \parbox{9.5cm}{A set of tools for building the soundfont database.}\\
+        \end{tabular}
+        \bigskip
+        
+        Beyond these modules, Wavetave is an audio processing sandbox written in octave language and C++. All algorithms used by Rocaloid are first tested in Wavetave.
+        
+        One undocumented module is CVEANN, a small Artificial Neuron Network library initially designed for formant detection and voice parameter generation. However the performance of CVEANN was unsatisfactory and it has been obsoleted.
+
+        
+        \pic{12cm}{SysStruct/Dependency.png}{Dependency Chart of Rocaloid3}
 
 
