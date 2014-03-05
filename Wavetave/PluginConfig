@@ -1,0 +1,26 @@
+global Plugin_Load = [
+                "Empty"
+                "Plugin_Load_EpRInitialization"
+        #       "Plugin_Load_PulseMarking"
+        #       "Plugin_Load_PulseMarking_Stable"
+        #       "Plugin_Load_PulseMarking_Naive"
+        ];
+...
+global Plugin_Wave = [
+                "Empty"
+        #       "Plugin_UnvoicedDetection"
+        #       "Plugin_PulseMarking"
+        #       "Plugin_VOTMarking"
+        ];
+...
+global Plugin_Spectrum = [
+                "Empty"
+                "Plugin_F0Marking"
+                "Plugin_F0Marking_ByPhase"
+                "Plugin_FormantFitting"
+        #       "Plugin_Freq2Pitch"
+        #       "Plugin_HarmonicMarking"
+        #       "Plugin_HarmonicMarking_Naive"
+        #       "Plugin_PhaseFigure"
+        ];
+
