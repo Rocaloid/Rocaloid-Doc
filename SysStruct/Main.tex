@@ -6,7 +6,7 @@
         
         \bigskip
         
-        \textbf{This reference focuses on Rocaloid in its narrow sense.}
+        \textbf{This reference focuses on Rocaloid in its narrow definition.}
         
         \bigskip
 
@@ -20,5 +20,13 @@
         
 \subsection{Values}\indent
 
-        In the back-end of Rocaloid, we code everything from scratch. The author Sleepwalking himself is a pure enthusiast in voice signal processing and he does not really care about development cycle.
+        In the back-end of Rocaloid, we code everything from scratch. The author Sleepwalking himself is a pure enthusiast in voice signal processing and he does not really care about development cycle. If you are looking for a reason for reinventing the wheel, we would suggest:
+        
+        \begin{itemize}
+                \item Our wheels focus on audio signal processing. Surely they are more relevant to our topic.
+                \item Our wheels are interrelated with great consistency. e.g. variable namming convention.
+                \item Our wheels run faster than other wheels(on certain conditions and platforms which are commonly used by our users). e.g. CVEDSP performs 1024-point FFT 1.3 times faster than fftw3 on x86 with SSE.
+                \item We intend to minimize dependencies of Rocaloid.
+                \item The developers themselves learn from the project as they reinvent the wheels.
+        \end{itemize}
 
