@@ -87,8 +87,10 @@ octave:1> SpectrumVisualizer
 \subsection{Function Description}
 
 \lstset{frame = none, numbers = none, language = octave, tabsize = 8}
+\renewcommand{\arraystretch}{1.2} %Table row stretch
 
-\subsubsection{UpdateView}
+\subsubsection{(Internal)UpdateView}
+        
         \begin{lstlisting}
 function UpdateView(Wave)
         \end{lstlisting}
@@ -122,7 +124,7 @@ function UpdateView(Wave)
                 \item Plugins in Plugin\_Wave are called.
         \end{itemize}
 
-\subsubsection{UpdateSpectrum}
+\subsubsection{(Internal)UpdateSpectrum}
         \begin{lstlisting}
 function [Ret, RetPhase, RetWave, ExtWave] = UpdateSpectrum(Wave)
         \end{lstlisting}
@@ -155,6 +157,38 @@ function [Ret, RetPhase, RetWave, ExtWave] = UpdateSpectrum(Wave)
         
         \begin{itemize}
                 \item None.
+        \end{itemize}
+
+\subsubsection{(Internal)UpdatePlotTick}
+        \begin{lstlisting}
+function UpdatePlotTick(SpectrumLowerRange, SpectrumUpperRange, DBLowerRange)
+        \end{lstlisting}
+        
+        Draws frequency ticks in the spectrum plot.
+        
+        \fakepar{Parameters}
+        
+        \io
+        {SpectrumLowerRange: Scalar & The left boundary of \\ & &
+                                      spectrum. (in hertz)\\
+        & SpectrumUpperRange:Scalar & The right boundary of \\ & &
+                                      spectrum.(in hertz)\\
+        & DBLowerRange:Scalar       & The lower boundary of \\ & &
+                                      decibel magnitude.}
+        {None &}
+        
+        \fakepar{Global Variables}
+        
+        \io
+        {FFTSize: Scalar           & Number of FFT points. \\
+        & SampleRate: Scalar       & Sample rate of loaded wave.
+        }
+        {None &}
+        
+        \fakepar{Behaviours}
+        
+        \begin{itemize}
+                \item Frequency labels are drawn on Figure 2.
         \end{itemize}
 
 
