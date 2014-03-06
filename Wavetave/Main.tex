@@ -39,91 +39,9 @@ $ for i in *.cc; do mkoctfile $i -s; done #This may take a while
         \end{lstlisting}
 
 \section{SpectrumVisualizer}
-
-\subsection{Basic Usage}\indent
-
-        SpectrumVisualizer can be activated in two ways: direct execution or activating from an octave console.
         
-        \lstset{language = bash, tabsize = 4}
-        \begin{lstlisting}
-$ cd Wavetave
-$ ./SpectrumVisualizer.m
-        \end{lstlisting}
+        \input{Wavetave/SpectrumVisualizer.tex}
         
-        Or
-        
-        \lstset{language = octave, tabsize = 8}
-        \begin{lstlisting}
-octave:1> SpectrumVisualizer
-        \end{lstlisting}
-        
-        \bigskip
-        
-        After starting up you will get two three windows: two plot windows and one terminal.
-        
-        Figure 1 is used to display the time-domain signal.
-        
-        Figure 2 displays the decibel-magnitude spectrum of the analyzed part of the signal.
-        
-        The terminal shows hints and extra information of the analyzed signal.
-        
-        \newpage
-        
-        \pic{11cm}{Wavetave/Startup.png}{SpectrumVisualizer starts up}
-        
-        When interacting with SpectrumVisualizer, you should always keep Figure 1 focused because it is the figure listening for mouse and key events.
-        
-        By default no wave is loaded when SpectrumVisualizer starts. Waves can be loaded by pressing O, then a prompt goes out in the terminal:
-        
-        \bigskip
-        \texttt{Wave to open(enclosed by quotes):}
-        \bigskip
-        
-        Input the file path with quotes. Currently SpectrumVisualizer only supports \textbf{single channel} wav files. The recommended sample rate is \textbf{44100Hz} and the recommended length is \textbf{1 to 5 seconds}. For example:
-        
-        \bigskip
-        \texttt{Wave to open(enclosed by quotes):'/tmp/test.wav'}
-        \bigskip
-        
-        If you are using gnome-terminal, this can be simply done by dragging the file into the terminal.
-
-        Then press enter.
-        
-        Our example is a short pronunciation of `A' that lasts for 1 second.
-        
-        \newpage
-        
-        \pic{11cm}{Wavetave/Load.png}{`A'}
-        
-        Some plugins for Wavetave are activated by default, as shown in Figure 2 above. The red and green line and the labels come from Plugin\_FormantFitting. We are not sure about which plugins are set to be activated by default because the settings are constantly changed.
-        
-        \subsubsection{Surfing through the Wave}\indent
-        
-        You can change the position of the analysis window by clicking on Figure 1.
-        
-        Press W to scale in; Press S to scale out.
-        
-        Press A to move the window to left; Press D to move to right.
-        
-        Depending on the speed of your device and the number of plugins that are activated, the response speed of SpectrumVisualizer may vary a lot. When it appears to be too slow, try to disable some plugins.
-        
-        \subsubsection{Configuring the Plugins}\indent
-        
-        Open /src/SpectrumVisualizer.m with your favourite editor. Look for the following lines:
-        
-        \lstset{language = octave, tabsize = 8}
-        \lstinputlisting{Wavetave/PluginConfig}
-        
-        Activate or deactivate a plugin by removing or adding the comment mark before it.
-        
-        \begin{itemize}
-                \item Plugin\_Load stands for plugins that are called when a new wave file is loaded.
-                \item Plugin\_Wave stands for plugins that are called when Figure 1 is repainted.
-                \item Plugin\_Spectrum stands for plugins that are called when Figure 2 is repainted.
-        \end{itemize}
-        
-        If you have implemented your own plugin, you can add its name to the above list. Make sure in each group of plugins there is at least an ``Empty" because it keeps the list from being empty.
-
 \section{Plugins}
 
 \section{MinCVE}
