@@ -46,12 +46,13 @@ Format: 1.51
 # --------------------------------------------------------------------------
 
 
-File: asdfds  (SpectrumVisualizer.m)
+File: Plugin_F0Marking  (Plugin_F0Marking.m)
+File: Plugin_F0Marking_ByPhase  (Plugin_F0Marking_ByPhase.m)
+File: SpectrumVisualizer  (SpectrumVisualizer.m)
 
 Group: Index  {
 
    Index: Everything
-   Class Index: Classes
-   Function Index: Functions
+   Variable Index: Variables
    }  # Group: Index
 

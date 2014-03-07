@@ -118,7 +118,6 @@ Language: Octave
    Extension: m
    Line Comment: #
    Block Comment: #{ #}
+   Function Prototype Ender: \n
+   Variable Prototype Ender: ;
    Line Extender: ...
-   Function Prototype Enders: \n
-   Variable Prototype Enders: ; \n
-
