@@ -48,6 +48,10 @@ Format: 1.51
 
 File: Plugin_F0Marking  (Plugin_F0Marking.m)
 File: Plugin_F0Marking_ByPhase  (Plugin_F0Marking_ByPhase.m)
+File: Plugin_Freq2Pitch  (Plugin_Freq2Pitch.m)
+File: Plugin_HarmonicMarking  (Plugin_HarmonicMarking.m)
+File: Plugin_HarmonicMarking_Naive  (Plugin_HarmonicMarking_Naive.m)
+File: Plugin_PhaseFigure  (Plugin_PhaseFigure.m)
 File: SpectrumVisualizer  (SpectrumVisualizer.m)
 
 Group: Index  {
