@@ -1,0 +1,45 @@
+\section{About Wavetave}\indent
+
+        Wavetave is an audio analysis and processing sandbox written in Octave Language and C++. The initiative of creating Wavetave is to test the feasibility of new algorithms, for example, the improved EpR Voice Model for CVE3.5.
+        
+        Before any new algorithm is put into application, it should be implemented and tested out in Wavetave first.
+        
+        \bigskip
+        
+        Wavetave has two parts: SpectrumVisualizer and MinCVE. The former is a powerful audio analyzer based on gnuplot; the later is a minimal and \textbf{very incomplete} version of CVE3.5, being developed just for testing the feasibility of CVE3.5.
+        
+\subsection{Source Code Quick Guide}\indent
+
+        The code repository for Wavetave:
+        
+        https://github.com/Rocaloid/Wavetave
+        
+        \bigskip
+        
+        \begin{itemize}
+                \item All source codes of Wavetave are placed under /src.
+                \item SpectrumVisualizer and all of its plugins are placed under /src.
+                \item MinCVE is placed under /src/MinCVE.
+                \item Some useful code snippets are placed under /src/Util.
+                \item All C++ written modules are placed under /src/Oct.
+        \end{itemize}
+        
+        \subsubsection{Dependencies}\indent
+        
+        You need gnuplot, octave, octave-dev and g++ to compile and run Wavetave.
+        
+        \subsubsection{Building Wavetave}\indent
+        
+        \lstset{language = bash, tabsize = 4}
+        
+        \begin{lstlisting}
+$ git clone https://github.com/Rocaloid/Wavetave
+$ cd Wavetave/src/Oct
+$ for i in *.cc; do mkoctfile $i -s; done #This may take a while
+        \end{lstlisting}
+
+\section{SpectrumVisualizer}
+        
+        \input{SpectrumVisualizer.tex}
+
+

@@ -27,7 +27,7 @@ octave:1> SpectrumVisualizer
         
         \newpage
         
-        \pic{11cm}{Wavetave/Startup.png}{SpectrumVisualizer starts up}
+        \pic{11cm}{Startup.png}{SpectrumVisualizer starts up}
         
         When interacting with SpectrumVisualizer, you should always keep Figure 1 focused because it is the figure listening for mouse and key events.
         
@@ -51,7 +51,7 @@ octave:1> SpectrumVisualizer
         
         \newpage
         
-        \pic{11cm}{Wavetave/Load.png}{`A'}
+        \pic{11cm}{Load.png}{`A'}
         
         Some plugins for Wavetave are activated by default, as shown in Figure 2 above. The red and green line and the labels come from Plugin\_FormantFitting. We are not sure about which plugins are set to be activated by default because the settings are constantly changed.
         
@@ -70,7 +70,7 @@ octave:1> SpectrumVisualizer
         Open /src/SpectrumVisualizer.m with your favourite editor. Look for the following lines:
         
         \lstset{language = octave, tabsize = 8}
-        \lstinputlisting{Wavetave/PluginConfig}
+        \lstinputlisting{PluginConfig}
         
         Activate or deactivate a plugin by removing or adding the comment mark before it.
         
@@ -81,115 +81,4 @@ octave:1> SpectrumVisualizer
         \end{itemize}
         
         If you have implemented your own plugin, you can add its name to the above list. Make sure in each group of plugins there is at least an ``Empty" because it keeps the list from being empty.
-
-\newpage
-
-\subsection{Function Description}
-
-\lstset{frame = none, numbers = none, language = octave, tabsize = 8}
-\renewcommand{\arraystretch}{1.2} %Table row stretch
-
-\subsubsection{(Internal)UpdateView}
-        
-        \begin{lstlisting}
-function UpdateView(Wave)
-        \end{lstlisting}
-        
-        Draws the time domain signal in the range of visible area.
-        
-        \fakepar{Parameters}
-        
-        \io
-        {Wave: 1DArray & The whole wave signal.}
-        {None &}
-        
-        \fakepar{Global Variables}
-        
-        \io
-        {ViewPos: Scalar            & The center of analysis window \\ & & 
-                                      in the loaded wave.\\
-        & ViewWidth: Scalar         & The width of analysis window.\\
-        & Length: Scalar            & The length of the loaded wave.\\
-        & Plugin\_Wave: CharMatrix  & The list of names of plugin to \\ & &
-                                      be called.
-        }
-        {PlotLeft: Scalar           & The left boundary of analysis \\ & &
-                                      window in the loaded wave.
-        }
-        
-        \fakepar{Behaviours}
-        
-        \begin{itemize}
-                \item Figure 1 is replotted.
-                \item Plugins in Plugin\_Wave are called.
-        \end{itemize}
-
-\subsubsection{(Internal)UpdateSpectrum}
-        \begin{lstlisting}
-function [Ret, RetPhase, RetWave, ExtWave] = UpdateSpectrum(Wave)
-        \end{lstlisting}
-        
-        Returns the spectrum and waveform in the range of FFT area.
-        
-        \fakepar{Parameters}
-        
-        \io
-        {Wave: 1DArray              & The whole wave signal.}
-        {Ret: 1DArray               & Decibel magnitude spectrum.\\
-        & RetPhase: 1DArray         & Phase spectrum.\\
-        & RetWave: 1DArray          & Waveform in analysis window.\\
-        & ExtWave: 1DArray          & Waveform in analysis window.\\
-        &                           & (128 samples longer than\\
-        &                           & RetWave)}
-        
-        \fakepar{Global Variables}
-        
-        \io
-        {ViewPos: Scalar            & The center of analysis window \\ & & 
-                                      in the loaded wave.\\
-        & ViewWidth: Scalar         & The width of analysis window.\\
-        & Length: Scalar            & The length of the loaded wave.\\
-        & FFTSize: Scalar           & Number of FFT points.
-        }
-        {None &}
-        
-        \fakepar{Behaviours}
-        
-        \begin{itemize}
-                \item None.
-        \end{itemize}
-
-\subsubsection{(Internal)UpdatePlotTick}
-        \begin{lstlisting}
-function UpdatePlotTick(SpectrumLowerRange, SpectrumUpperRange, DBLowerRange)
-        \end{lstlisting}
-        
-        Draws frequency ticks in the spectrum plot.
-        
-        \fakepar{Parameters}
-        
-        \io
-        {SpectrumLowerRange: Scalar & The left boundary of \\ & &
-                                      spectrum. (in hertz)\\
-        & SpectrumUpperRange:Scalar & The right boundary of \\ & &
-                                      spectrum.(in hertz)\\
-        & DBLowerRange:Scalar       & The lower boundary of \\ & &
-                                      decibel magnitude.}
-        {None &}
-        
-        \fakepar{Global Variables}
-        
-        \io
-        {FFTSize: Scalar           & Number of FFT points. \\
-        & SampleRate: Scalar       & Sample rate of loaded wave.
-        }
-        {None &}
-        
-        \fakepar{Behaviours}
-        
-        \begin{itemize}
-                \item Frequency labels are drawn on Figure 2.
-        \end{itemize}
-
-
 
