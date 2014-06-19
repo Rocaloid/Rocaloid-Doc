@@ -40,6 +40,7 @@ The scope of this standard applies to all **codes written in C** in Rocaloid Pro
 
 * Tabs should be replaced by space. Tab size should be 4 characters.
 * Maximum length for a line is 80 characters.
+* When the length of a line exceeds 80 characters, the line should be separated and continued in the next line, with an indent of 4 more characters.
 
 ###2.2.1 Newline and brackets
 
@@ -88,7 +89,7 @@ The above rules apply to macro definitions.
 3. Naming
 ---
 
-All C-written codes follow an extended **Upper Camel Case** naming method.
+All identifiers follow an extended **Upper Camel Case** naming method.
 
 ###3.1 External Identifier
 
@@ -203,11 +204,13 @@ Examples:
 
 ###3.2 Function Parameters
 
-###3.3 Word Choice/Synonyms
+* Always use `Dest` to represent the data destination of an operation.
+* Always use `Sorc` to represent the data source of an operation.
+* Always use `Size` instead of `Length`.
+* When multiple destinations or sources have to be specified, add numbers after them. e.g. `Dest1`, `Dest2` ...
+* When conjuate destinations or sources or other parameters have to be specified, add postfixes after them, 4 characters long is preferred. e.g. `SorcReal`, `SorcImag`.
 
-* Use `Size` instead of `Length`.
-
-###3.4 Other
+###3.3 Other
 
 The above rules apply to macro definitions.
 
@@ -216,7 +219,13 @@ The above rules apply to macro definitions.
 
 ###4.1 Class
 
-###4.2 Function
+###4.2 Functions
+
+* For methods, the first parameters should always be "pointer to Class".
+* For other functions, the first parameters should always be the destination of operation, except when their results are returned.
+* In the following parameters, sources of operation should have the highest priority.
+* **Do not** use `Dest` or `Sorc` to represent data with non pointer data types.
+* Functions are not recommended to return a pointer. If so, their Function Cores or Function Prefixes should contain `Alloc` or `AL`.
 
 ###4.2.1 RInterface
 
