@@ -2,7 +2,7 @@
 
 Language: C
 
-Version 0, Revision 1
+Version 1, Revision 0
 
 ---
 
@@ -17,17 +17,21 @@ The scope of this standard applies to all **codes written in C** in Rocaloid Pro
 
 ####1.1.1 About this Revision
 
-* 1.2: Add definition of Object.
-* 3.1: Add Object Identifier.
-* 3.1.9: Add definition of Object Name.
-* 3.3: Avoiding underlines.
-* Exchange chapter 4 and 5.
-* 4: Add additional language standards.
+* 1.2: Broaden definition of user.
+* 2.2.1: Add newline for comments.
+* 2.4: Add specification to string literals.
+* 4: Add restriction to the use of Function Declarators.
+* 5.1: Add class declaration standards.
+* 5.2: Additions to Naming.
+* 5.3: Add specification to macros.
+* 5.4: Add specification to RTemplates.
+* I.1: Add RTemplate examples.
+* Add bibliography.
 
 ###1.2 Definitions
 
 * `Component`: refers to the source code of a library or executable.
-* `User`: refers to anyone who utilize components under Rocaloid Project.
+* `User`: refers to anyone who utilize certain source codes(can be components or parts of codes) under Rocaloid Project.
 * `Contributor`: refers to anyone who contribute codes to Rocaloid Project.
 * `Class`: refers to a structure declared by `RClass` of RUtil2.
 * `Interface`: refers to any **standard formed by codes that contributors and users share** within the published codes.
@@ -70,6 +74,8 @@ And are not separated when:
 
 The separated braces **should not** be indented. But the succedent block items **should** be indented.
 
+Comments which start at the beginning of a line should leave one blank line above each of them.
+
 ####2.2.2 Exceptions
 
 When a block has only one item, its braces should be omitted. But the block items are still indented. The above rules still apply to the items.
@@ -99,6 +105,8 @@ When **one of** the above rules is satisfied, a space should be inserted before 
 ###2.4 Other
 
 The above rules apply to macro definitions.
+
+The above rules apply to string literals.
 
 3. Naming
 ---
@@ -231,8 +239,8 @@ The name of an object.
 * Always use `Dest` to represent the data destination of an operation.
 * Always use `Sorc` to represent the data source of an operation.
 * Always use `Size` instead of `Length`.
-* When multiple destinations or sources have to be specified, add numbers after them. e.g. `Dest1`, `Dest2` ...
-* When conjuate destinations or sources or other parameters have to be specified, add postfixes after them, 4 characters long is preferred. e.g. `SorcReal`, `SorcImag`.
+* When multiple destinations or sources have to be specified, add numbers after them. e.g., `Dest1`, `Dest2` ...
+* When conjuate destinations or sources or other parameters have to be specified, add postfixes after them, 4 characters long is preferred. e.g., `SorcReal`, `SorcImag`.
 
 ###3.3 Other
 
@@ -246,8 +254,9 @@ The above rules apply to macro definitions.
 The C programming language standard for Rocaloid Project is ISO/IEC 9899:1999, with the additional restrictions:
 
 * Type qualifiers(`const`, `restrict`, and `volatile`) should never be used.
+* Function declarators should be avoided except when the storage class specifier is `typedef`.
 
-###4.1 Scope-specific Standard
+###4.1 Scope-specific Standards
 
 * `register` specifiers should never be used, except in RFNL.
 * `volatile` qualifiers can be used in RFNL.
@@ -257,28 +266,156 @@ The C programming language standard for Rocaloid Project is ISO/IEC 9899:1999, w
 
 ###5.1 Class
 
+####5.1.1 Class Declaration Standards
+
+* `RInherit` should always be placed in the first.
+* Comment `//Public` should be placed above the struct declarations which are intended to be visible to the users of the class.
+* Comment `//Private` should be placed above the struct declarations which are intended to be invisible to the users of the class.
+* `//Public` and `//Private` comments should only appear once in each class declaration.
+
 ###5.2 Functions
+
+####5.2.1 From/To Notations
+
+*   For functions that accept, process and return any data, it is recommended to name those functions(Function Core) as `AFromB` or `BToA`. The former is called From Notation; the later is called To Notation. In such case, A is called Function Destination; B is called Function Source.
+*   Operative Source is the class name on the left side of a From or To Notation; Operative Destination is the one on the right side.
+*   For methods of such type, `_` should be inserted after the Operative Source. e.g., `A_FromB`, `B_ToA`.
+*   From Notation is more recommended than To Notation, except when:
+    *   Two-way conversions are needed, but the data of one class(Derived Class) originates from the other(Source Class). In such situation, the Operative Destination of both From Notation and To Notation named functions should be Function Destination; the Operative Source of both should be Function Source. e.g., `SourceToDerived` `SourceFromDerived`.
+
+####5.2.2 Formal Parameters
 
 * For methods, the first parameters should always be "pointer to Class".
 * For other functions, the first parameters should always be the destination of operation, except when their results are returned.
 * In the following parameters, sources of operation should have the highest priority.
 * **Do not** use `Dest` or `Sorc` to represent data with non pointer data types.
+
+####5.2.3 Return Type
+
 * Functions are not recommended to return a pointer. If so, their Function Cores or Function Prefixes should contain `Alloc` or `AL`.
 
-####5.2.1 RInterface
+####5.2.4 RInterface
+
+* The Function Prefix of a RInterface should start with `I`, which represents "Interface".
 
 ###5.3 Macro
 
+*   **Do not** define macros in headers if the scope of macro is not intended to be every file that directly or indirectly includes the header.
+*   When defining a macro in RTemplate files, the macro should be defined(`#define`) in the start of the file, and undefined(`#undef`) in the end. The identifier after `#undef` should be aligned with that after `#define`. i.e., to insert two spaces after `#undef`.
+*   When macro is used to abbreviate class names in RTemplate files, the macro should be named as `_{ClassName}`. The example is given:
+    *   `#define _{ClassName} _C({Namespace Prefix}{{Annoymous Prefix(opt)}{Namespace Abbreviation}_{ClassName}, _, _T1, _, _T2, ...}`
+    *   `#undef  _{ClassName}`
+*   Use macros to avoid repitition of code snippets if possible.
+
 ###5.4 RTemplate
 
-###5.5 Other
+* Use RTemplate to avoid repitition of class declarations if possible.
+* When dealing with float-point data types, RTemplate should be used to provide both single and double precision float-point support.
+* The format of a set of files that defines a template class with RTemplate is given by example. Please refer to Appendix I.1.
+* When multiple template classes are declared using the same header or source(**not template header or template source**), `#include <RUtil2.h>` should be inserted before each declaration.
 
 Appendix
 ---
 
 ###I. Examples
 
+####I.1 Template Class Declaration
+
+ClassName.h:
+
+    #ifndef LIBRARY_CLASSNAME_H
+    #define LIBRARY_CLASSNAME_H
+
+    #include <RUtil2.h>
+    
+    #if 0
+        #include "_ClassName.h"
+    #endif
+    
+    #ifdef __Library_Install
+        #define _RTAddress "LibraryPath/DirectoryPath/_ClassName.h"
+    #else
+        #define _RTAddress "DirectoryPath/_ClassName.h"
+    #endif
+    
+    #define _RTClassName _ClassName
+    #define _Attr 1
+    
+    #define _T1 Float
+    #include <RUtil2/Core/RTemplate.h>
+    
+    #define _T1 Double
+    #include <RUtil2/Core/RTemplate.h>
+    
+    ...
+    
+    #endif
+
+ClassName.c:
+
+    #include "ClassName.h"
+    #include <RUtil2.h>
+    
+    #define _RTAddress "DirectoryPath/_ClassName.h"
+    
+    #define _RTClassName _ClassName
+    #define _Attr 1
+    
+    #define _T1 Float
+    #include <RUtil2/Core/RTemplate.h>
+    
+    #define _T1 Double
+    #include <RUtil2/Core/RTemplate.h>
+    
+    ...
+
+_ClassName.h:
+
+    #define _Type _C(Library_Type, _, _T1)
+    
+    RClass(_RTClassName)
+    {
+        RInherit(RObject);
+        
+        //Public
+        ...
+        
+        //Private
+        ...
+    };
+    
+    ...
+    
+    #undef  _Type
+
+_ClassName.rc:
+
+    RCtor(_RTClassName)
+    {
+        ...
+        RInit(_RTClassName);
+    }
+    
+    RDtor(_RTClassName)
+    {
+        ...
+    }
+    
+    ...
+
 ###II. Revision History
+
+####Version 1, Revision 0
+
+* 1.2: Broaden definition of user.
+* 2.2.1: Add newline for comments.
+* 2.4: Add specification to string literals.
+* 4: Add restriction to the use of Function Declarators.
+* 5.1: Add class declaration standards.
+* 5.2: Additions to Naming.
+* 5.3: Add specification to macros.
+* 5.4: Add specification to RTemplates.
+* I.1: Add RTemplate examples.
 
 ####Version 0, Revision 1
 
@@ -289,4 +426,7 @@ Appendix
 * Exchange chapter 4 and 5.
 * 4: Add additional language standards.
 
+Bibliography
+---
 
+1. WG14. "ISO/IEC 9899:1999 - Programming languages - C". open-std.org.
